@@ -14,8 +14,12 @@ func _ready():
 			var posicion = asignar_movimientos(i, j)
 			set_cell(0, Vector2i(i, j), 0, posicion)
 			
-			
-			# set_cell(0, Vector2i(columna, fila), 0, Vector2i(x, y))
+	# agua(0 , 0)
+	for i in range(0, 8 , 1):
+		for j in range(0, 8, 1):
+			# if not (x,y).isagua():
+				# arreglar()
+			pass
 
 func asignar_movimientos(x, y):
 	var movimientos = [false, false, false, false]
