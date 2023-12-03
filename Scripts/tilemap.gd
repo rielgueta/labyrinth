@@ -10,6 +10,11 @@ var aguas = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0,
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var sed = 2285957176
+	# var sed = randi()
+	seed(sed)
+	print(sed)
+	
 	for i in range(0, ancho_laberinto, 1):
 		aguas.append([])
 		for j in range(0, ancho_laberinto, 1):

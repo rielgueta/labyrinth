@@ -1,6 +1,6 @@
 extends Node2D
 var grid_size = 16
-
+var walk_trough_walls = false
 # comentadas por si las utilizamos en el futuro
 #func _ready():
 #	$Sprite2D.show()
@@ -22,12 +22,14 @@ func _unhandled_key_input(event):
 		direction.x = -1
 	if event.is_action_released("ui_right"):
 		direction.x = 1
+	if event.is_action_released("DEBUG"):
+		walk_trough_walls = not walk_trough_walls
 	move(direction)
 
 func move(dir):
 	# Lanza un "rayo laser" en la dirección en la que se quiere mover y si no colisiona con nada...
 	$RayCast2D.target_position = dir*grid_size
 	$RayCast2D.force_raycast_update()
-	if not $RayCast2D.is_colliding():
+	if not $RayCast2D.is_colliding() or walk_trough_walls:
 		# Entonces se mueve una celda (El tamaño de la celda)
 		position += dir*grid_size
