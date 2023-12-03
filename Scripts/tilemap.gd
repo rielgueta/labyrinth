@@ -6,19 +6,24 @@ var arriba = 0
 var izquierda = 1
 var abajo = 2
 var derecha = 3
+var aguas = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(0, ancho_laberinto, 1):
+		aguas.append([])
 		for j in range(0, ancho_laberinto, 1):
 			var posicion = asignar_movimientos(i, j)
+			aguas[i].append(0)
 			set_cell(0, Vector2i(i, j), 0, posicion)
 
-	# agua(0 , 0)
-	for i in range(0, ancho_laberinto, 1):
-		for j in range(0, ancho_laberinto, 1):
-			# if not (x,y).isagua():
-				# arreglar()
-			pass
+			
+	aguas = agua(0, 0)
+	for i in range(0, 8 , 1):
+		for j in range(0, 8, 1):
+			if aguas[i][j] == 0:
+				arreglar(i, j)
+				aguas = agua(i, j)
 
 func asignar_movimientos(x, y):
 	# Conexiones con las celdas cercanas
@@ -38,17 +43,17 @@ func asignar_movimientos(x, y):
 			movimientos[arriba] = true
 
 	# Para eso contamos la cantidad de conexiones que queremos que tenga
-	# 3/20 1 conexion
+	# 4/20 1 conexion
 	# 10/20 2 conexiones
-	# 7/20 3 conexiones
+	# 8/20 3 conexiones
 	# 1/20 4 conexiones
-	var n_aleatorio = randi_range(0, 19)
+	var n_aleatorio = randi_range(1, 100)
 	var cantidad_de_conexiones = 1
-	if 4 <= n_aleatorio:
+	if n_aleatorio >= 36:
 		cantidad_de_conexiones += 1
-	if 13 <= n_aleatorio:
+	if n_aleatorio >= 76:
 		cantidad_de_conexiones += 1
-	if 19 == n_aleatorio:
+	if n_aleatorio >= 96:
 		cantidad_de_conexiones += 1
 
 	# Posteriormente contamos la cantidad actual de conexiones que se tienen, considerando las que estaban
@@ -116,3 +121,50 @@ func convert_to_cell(movimientos):
 		posicion.x += 2
 
 	return posicion
+
+func agua(x, y):
+	if aguas[x][y] == 1:
+		return
+	
+	aguas[x][y] = 1
+	
+	
+	var cell = get_cell_atlas_coords(0, Vector2i(x, y))
+	var movimientos = get_moves(cell)
+	for i in range(0, 4, 1):
+		if movimientos[i]:
+			if i == 0:
+				agua(x, y - 1)
+			elif i == 1:
+				agua(x - 1, y)
+			elif i == 2:
+				agua(x, y + 1)
+			else:
+				agua(x + 1, y)
+	return aguas
+
+func arreglar(x, y):
+	var cell = get_cell_atlas_coords(0, Vector2i(x, y))
+	var movimientos = get_moves(cell)
+	
+	if x != 0:
+		var cell_izq = get_cell_atlas_coords(0, Vector2i(x - 1, y))
+		var movimientos_izq = get_moves(cell_izq)
+		
+		movimientos[izquierda] = true
+		movimientos_izq[derecha] = true
+		
+		var posicion_izq = convert_to_cell(movimientos_izq)
+		set_cell(0, Vector2i(x - 1, y), 0, posicion_izq)
+	else:
+		var cell_arr = get_cell_atlas_coords(0, Vector2i(x, y - 1))
+		var movimientos_arr = get_moves(cell_arr)
+		
+		movimientos[arriba] = true
+		movimientos_arr[abajo] = true
+		
+		var posicion_arr = convert_to_cell(movimientos_arr)
+		set_cell(0, Vector2i(x, y - 1), 0, posicion_arr)
+	
+	var posicion = convert_to_cell(movimientos)
+	set_cell(0, Vector2i(x, y), 0, posicion)
