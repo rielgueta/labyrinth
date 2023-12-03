@@ -6,27 +6,37 @@ var arriba = 0
 var izquierda = 1
 var abajo = 2
 var derecha = 3
-var aguas = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
+#var aguas = [[0, 0, 0, 0, 0, 0, 0, 0], 
+#             [0, 0, 0, 0, 0, 0, 0, 0], 
+#			 [0, 0, 0, 0, 0, 0, 0, 0], 
+#			 [0, 0, 0, 0, 0, 0, 0, 0], 
+#			 [0, 0, 0, 0, 0, 0, 0, 0], 
+#			 [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
+
+var aguas = create_2d_array(ancho_laberinto,ancho_laberinto,0)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var sed = 2285957176
-	# var sed = randi()
+	
+	# Inicializamos la semilla para el laberinto
+	# var sed = 2285957176
+	var sed = randi()
 	seed(sed)
 	print(sed)
 	
+	# Se crea un laberinto coherente
 	for i in range(0, ancho_laberinto, 1):
-		aguas.append([])
 		for j in range(0, ancho_laberinto, 1):
 			var posicion = asignar_movimientos(i, j)
-			aguas[i].append(0)
 			set_cell(0, Vector2i(i, j), 0, posicion)
 
-			
+	# Se inicializa la función para conectar todo el laberinto
 	aguas = agua(0, 0)
-	for i in range(0, 8 , 1):
-		for j in range(0, 8, 1):
+	for i in range(0, ancho_laberinto , 1):
+		for j in range(0, ancho_laberinto, 1):
 			if aguas[i][j] == 0:
+				# Se intenta arreglar y se vuelve a checkear
 				arreglar(i, j)
 				aguas = agua(i, j)
 
@@ -91,6 +101,7 @@ func asignar_movimientos(x, y):
 	if y == ancho_laberinto - 1:
 		movimientos[abajo] = false
 	
+	# Se retorna la Tile que debería ser asignada a la posición correspondiente
 	var posicion = convert_to_cell(movimientos)
 	return posicion
 
@@ -128,14 +139,16 @@ func convert_to_cell(movimientos):
 	return posicion
 
 func agua(x, y):
+	# Condicion de salida
 	if aguas[x][y] == 1:
 		return
 	
 	aguas[x][y] = 1
 	
-	
+	# Obtenemos la información de la celda
 	var cell = get_cell_atlas_coords(0, Vector2i(x, y))
 	var movimientos = get_moves(cell)
+	# LLama recursivamente a la función
 	for i in range(0, 4, 1):
 		if movimientos[i]:
 			if i == 0:
@@ -173,3 +186,16 @@ func arreglar(x, y):
 	
 	var posicion = convert_to_cell(movimientos)
 	set_cell(0, Vector2i(x, y), 0, posicion)
+
+
+func create_2d_array(width, height, value):
+	var a = []
+
+	for y in range(height):
+		a.append([])
+		a[y].resize(width)
+
+		for x in range(width):
+			a[y][x] = value
+
+	return a
