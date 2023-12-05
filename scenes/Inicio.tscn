@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://71ncjgbenwkc"]
+
+[ext_resource type="Script" path="res://Scripts/Inicio.gd" id="1_nr4md"]
+[ext_resource type="FontFile" uid="uid://dchv2aiqqob4d" path="res://fonts/Xolonium-Regular.ttf" id="2_pw826"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nr4md")
+
+[node name="StartButton" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 368.0
+offset_bottom = 167.0
+theme_override_fonts/font = ExtResource("2_pw826")
+theme_override_font_sizes/font_size = 25
+text = "Empezar a jugar"
+
+[node name="Controls" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 128.0
+offset_top = 192.0
+offset_right = 368.0
+offset_bottom = 231.0
+theme_override_fonts/font = ExtResource("2_pw826")
+theme_override_font_sizes/font_size = 25
+text = "Controles"
+
+[node name="Credits" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 368.0
+offset_bottom = 295.0
+theme_override_fonts/font = ExtResource("2_pw826")
+theme_override_font_sizes/font_size = 25
+text = "Créditos"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(2, 2)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 23.0
+offset_right = 404.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("2_pw826")
+theme_override_font_sizes/font_size = 27
+text = "Labyrinth Quest XIX"
+
+[connection signal="pressed" from="StartButton" to="." method="start_button_pressed"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c75k4hk1l6yan"]
+
+[ext_resource type="PackedScene" uid="uid://bewouc6umc27" path="res://scenes/Laberinto.tscn" id="1_7o2eb"]
+[ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/Player.tscn" id="2_t7khs"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(6, 6)
+
+[node name="TileMap" parent="." instance=ExtResource("1_7o2eb")]
+
+[node name="Player" parent="." instance=ExtResource("2_t7khs")]
