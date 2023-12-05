@@ -1,14 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://c75k4hk1l6yan"]
+[gd_scene load_steps=6 format=3 uid="uid://c75k4hk1l6yan"]
 
 [ext_resource type="PackedScene" uid="uid://bewouc6umc27" path="res://scenes/Laberinto.tscn" id="1_7o2eb"]
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_xp63t"]
 [ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/Player.tscn" id="2_t7khs"]
+[ext_resource type="Script" path="res://Scripts/Salida.gd" id="4_ur3wm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lkjs"]
+size = Vector2(15.5, 16.3125)
 
 [node name="Game" type="Node2D"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-zoom = Vector2(6, 6)
+script = ExtResource("1_xp63t")
 
 [node name="TileMap" parent="." instance=ExtResource("1_7o2eb")]
 
 [node name="Player" parent="." instance=ExtResource("2_t7khs")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(-40, -24)
+anchor_mode = 0
+enabled = false
+zoom = Vector2(10, 10)
+
+[node name="ScoreTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 134.0
+offset_right = 174.0
+offset_bottom = 40.0
+
+[node name="Salida" type="Area2D" parent="."]
+script = ExtResource("4_ur3wm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Salida"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_4lkjs")
+
+[node name="Debug" type="Camera2D" parent="."]
+
+[connection signal="body_entered" from="Player" to="." method="_on_player_body_entered"]
+[connection signal="body_entered" from="Salida" to="." method="_on_salida_body_entered"]
+[connection signal="body_entered" from="Salida" to="Salida" method="_on_body_entered"]

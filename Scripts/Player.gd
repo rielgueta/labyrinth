@@ -1,4 +1,4 @@
-extends Node2D
+extends RigidBody2D
 var grid_size = 16
 var walk_trough_walls = false
 # comentadas por si las utilizamos en el futuro
@@ -33,3 +33,4 @@ func move(dir):
 	if not $RayCast2D.is_colliding() or walk_trough_walls:
 		# Entonces se mueve una celda (El tamaño de la celda)
 		position += dir*grid_size
+

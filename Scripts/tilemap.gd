@@ -1,19 +1,30 @@
 extends TileMap
 
 # Variable del ancho del laberinto
-@export var ancho_laberinto = 8
+@export var tamaño_laberinto = 8
 var arriba = 0
 var izquierda = 1
 var abajo = 2
 var derecha = 3
-var aguas = create_2d_array(ancho_laberinto,ancho_laberinto,0)
 
+var aguas = create_2d_array(tamaño_laberinto, tamaño_laberinto,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	generar_laberinto(tamaño_laberinto)
+
+func generar_laberinto(ancho_laberinto, sed=0):
 	# Inicializamos la semilla para el laberinto
-	var sed = 2285957176
+	# var sed = 2285957176
 	# var sed = randi()
+	tamaño_laberinto = ancho_laberinto
+	
+	aguas = create_2d_array(tamaño_laberinto, tamaño_laberinto,0)
+	if sed:
+		seed(sed)
+	else:
+		seed(randi())
+		
 	seed(sed)
 	print(sed)
 	
@@ -26,8 +37,8 @@ func _ready():
 
 			
 	aguas = agua(0, 0)
-	for i in range(0, 8 , 1):
-		for j in range(0, 8, 1):
+	for i in range(0, tamaño_laberinto, 1):
+		for j in range(0, tamaño_laberinto, 1):
 			if aguas[i][j] == 0:
 				arreglar(i, j)
 				aguas = agua(i, j)
@@ -89,10 +100,10 @@ func asignar_movimientos(x, y):
 
 		# Estos comandos simplemente se encargan de eliminar las puertas que puedan haber quedado en la orilla derecha
 		# y abajo
-	if x == ancho_laberinto - 1:
+	if x == tamaño_laberinto - 1:
 		movimientos[derecha] = false
 
-	if y == ancho_laberinto - 1:
+	if y == tamaño_laberinto - 1:
 		movimientos[abajo] = false
 	
 	var posicion = convert_to_cell(movimientos)
