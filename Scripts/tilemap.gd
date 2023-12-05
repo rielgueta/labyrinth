@@ -6,10 +6,20 @@ var arriba = 0
 var izquierda = 1
 var abajo = 2
 var derecha = 3
+<<<<<<< Updated upstream
 var aguas = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+=======
+var aguas = create_2d_array(ancho_laberinto,ancho_laberinto,0)
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	
+	# Inicializamos la semilla para el laberinto
+>>>>>>> Stashed changes
 	var sed = 2285957176
 	# var sed = randi()
 	seed(sed)
@@ -29,6 +39,8 @@ func _ready():
 			if aguas[i][j] == 0:
 				arreglar(i, j)
 				aguas = agua(i, j)
+	
+	# modificar_celda(Vector2i.ZERO, arriba)
 
 func asignar_movimientos(x, y):
 	# Conexiones con las celdas cercanas
@@ -149,6 +161,7 @@ func agua(x, y):
 	return aguas
 
 func arreglar(x, y):
+	# Arregla el laberinto para que esté interconectado
 	var cell = get_cell_atlas_coords(0, Vector2i(x, y))
 	var movimientos = get_moves(cell)
 	
@@ -173,3 +186,25 @@ func arreglar(x, y):
 	
 	var posicion = convert_to_cell(movimientos)
 	set_cell(0, Vector2i(x, y), 0, posicion)
+<<<<<<< Updated upstream
+=======
+
+func modificar_celda(coordenadas, modificador):
+	var celda_a_mod = get_cell_atlas_coords(0, coordenadas)
+	var mov = get_moves(celda_a_mod)
+	mov[modificador] = true
+	var coord_atlas = convert_to_cell(mov)
+	set_cell(0,coordenadas, 0, coord_atlas)
+	
+func create_2d_array(width, height, value):
+	var a = []
+
+	for y in range(height):
+		a.append([])
+		a[y].resize(width)
+
+		for x in range(width):
+			a[y][x] = value
+
+	return a
+>>>>>>> Stashed changes

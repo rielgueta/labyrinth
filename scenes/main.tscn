@@ -6,10 +6,10 @@
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -20)
 anchor_mode = 0
 zoom = Vector2(4, 4)
 
 [node name="TileMap" parent="." instance=ExtResource("1_7ff8m")]
 
 [node name="Player" parent="." instance=ExtResource("2_d1dab")]
-position = Vector2(8, 8)
