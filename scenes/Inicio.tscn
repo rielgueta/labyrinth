@@ -60,3 +60,4 @@ theme_override_font_sizes/font_size = 27
 text = "Labyrinth Quest XIX"
 
 [connection signal="pressed" from="StartButton" to="." method="start_button_pressed"]
+[connection signal="pressed" from="Controls" to="." method="presiona_controles"]

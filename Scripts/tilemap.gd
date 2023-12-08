@@ -11,7 +11,8 @@ var aguas = create_2d_array(tamaño_laberinto, tamaño_laberinto,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generar_laberinto(tamaño_laberinto)
+	# generar_laberinto(tamaño_laberinto)
+	pass
 
 func generar_laberinto(ancho_laberinto, sed=0):
 	# Inicializamos la semilla para el laberinto
@@ -20,12 +21,10 @@ func generar_laberinto(ancho_laberinto, sed=0):
 	tamaño_laberinto = ancho_laberinto
 	
 	aguas = create_2d_array(tamaño_laberinto, tamaño_laberinto,0)
-	if sed:
+	if sed != 0:
 		seed(sed)
 	else:
 		seed(randi())
-		
-	seed(sed)
 	print(sed)
 	
 	for i in range(0, ancho_laberinto, 1):
@@ -42,8 +41,7 @@ func generar_laberinto(ancho_laberinto, sed=0):
 			if aguas[i][j] == 0:
 				arreglar(i, j)
 				aguas = agua(i, j)
-	
-	modificar_celda(Vector2i(ancho_laberinto-1, ancho_laberinto-1), abajo)
+
 
 func asignar_movimientos(x, y):
 	# Conexiones con las celdas cercanas
@@ -67,13 +65,13 @@ func asignar_movimientos(x, y):
 	# 10/20 2 conexiones
 	# 8/20 3 conexiones
 	# 1/20 4 conexiones
-	var n_aleatorio = randi_range(1, 100)
+	var n_aleatorio = randi_range(1, 110)
 	var cantidad_de_conexiones = 1
-	if n_aleatorio >= 36:
+	if n_aleatorio >= 45:
 		cantidad_de_conexiones += 1
-	if n_aleatorio >= 76:
+	if n_aleatorio >= 60:
 		cantidad_de_conexiones += 1
-	if n_aleatorio >= 96:
+	if n_aleatorio >= 106:
 		cantidad_de_conexiones += 1
 
 	# Posteriormente contamos la cantidad actual de conexiones que se tienen, considerando las que estaban
@@ -208,3 +206,4 @@ func create_2d_array(width, height, value):
 			a[y][x] = value
 
 	return a
+

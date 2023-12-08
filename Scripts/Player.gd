@@ -1,6 +1,8 @@
 extends RigidBody2D
 var grid_size = 16
 var walk_trough_walls = false
+
+signal moved
 # comentadas por si las utilizamos en el futuro
 #func _ready():
 #	$Sprite2D.show()
@@ -27,6 +29,7 @@ func _unhandled_key_input(event):
 	move(direction)
 
 func move(dir):
+	moved.emit()
 	# Lanza un "rayo laser" en la dirección en la que se quiere mover y si no colisiona con nada...
 	$RayCast2D.target_position = dir*(grid_size*2-4)
 	$RayCast2D.force_raycast_update()
