@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctksfnssr53yy"]
+[gd_scene load_steps=3 format=3 uid="uid://ctksfnssr53yy"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_nksy3"]
 [ext_resource type="Texture2D" uid="uid://cychlyva16ia6" path="res://Art/map_pointer.png" id="2_uku1f"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_myx0o"]
-size = Vector2(5, 4)
-
-[node name="Player" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="Node2D" type="Node2D"]
 script = ExtResource("1_nksy3")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -19,7 +15,3 @@ target_position = Vector2(0, 28)
 texture_filter = 1
 texture = ExtResource("2_uku1f")
 centered = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7.5, 7)
-shape = SubResource("RectangleShape2D_myx0o")

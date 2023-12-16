@@ -194,7 +194,18 @@ func modificar_celda(coordenadas, modificador):
 	mov[modificador] = true
 	var coord_atlas = convert_to_cell(mov)
 	set_cell(0,coordenadas, 0, coord_atlas)
-	
+
+func esconder(ancho):
+	for i in range(ancho):
+		for j in range(ancho):
+			set_cell(1, Vector2i(i, j), 1, Vector2i.ZERO)
+
+func mostrar(coords:Vector2i):
+	erase_cell(1, coords-Vector2i.LEFT)
+	erase_cell(1, coords-Vector2i.RIGHT)
+	erase_cell(1, coords-Vector2i.UP)
+	erase_cell(1, coords-Vector2i.DOWN)
+
 func create_2d_array(width, height, value):
 	var a = []
 

@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Node2D
 var grid_size = 16
 var walk_trough_walls = false
 
@@ -29,11 +29,10 @@ func _unhandled_key_input(event):
 	move(direction)
 
 func move(dir):
-	moved.emit()
 	# Lanza un "rayo laser" en la dirección en la que se quiere mover y si no colisiona con nada...
 	$RayCast2D.target_position = dir*(grid_size*2-4)
 	$RayCast2D.force_raycast_update()
 	if not $RayCast2D.is_colliding() or walk_trough_walls:
 		# Entonces se mueve una celda (El tamaño de la celda)
 		position += dir*grid_size
-
+		moved.emit()
