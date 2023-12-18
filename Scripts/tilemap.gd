@@ -20,6 +20,10 @@ func generar_laberinto(ancho_laberinto, sed=0):
 	# var sed = randi()
 	tamaño_laberinto = ancho_laberinto
 	
+	# MOMENTANEO
+	set_cell(1 , Vector2i(2, 0), 4, Vector2i(2, 0))
+	set_cell(1 , Vector2i(1, 0), 4, Vector2i(1, 0))
+	
 	aguas = create_2d_array(tamaño_laberinto, tamaño_laberinto,0)
 	if sed != 0:
 		seed(sed)
@@ -193,19 +197,27 @@ func modificar_celda(coordenadas, modificador):
 	var mov = get_moves(celda_a_mod)
 	mov[modificador] = true
 	var coord_atlas = convert_to_cell(mov)
-	set_cell(0,coordenadas, 2, coord_atlas)
+	set_cell(0, coordenadas, 2, coord_atlas)
 
 func esconder(ancho):
 	for i in range(ancho):
 		for j in range(ancho):
-			set_cell(1, Vector2i(i, j), 3, Vector2i.ZERO)
+			set_cell(2, Vector2i(i, j), 3, Vector2i.ZERO)
+			
 
 func mostrar(coords:Vector2i):
-	erase_cell(1, coords-Vector2i.LEFT)
-	erase_cell(1, coords-Vector2i.ZERO)
-	erase_cell(1, coords-Vector2i.RIGHT)
-	erase_cell(1, coords-Vector2i.UP)
-	erase_cell(1, coords-Vector2i.DOWN)
+	var movimientos = get_moves(get_cell_atlas_coords(0, coords))
+	erase_cell(2, coords-Vector2i.ZERO)
+	for i in range(0, 4, 1):
+		if movimientos[i]:
+			if i == 0:
+				erase_cell(2, coords + Vector2i.UP)
+			elif i == 1:
+				erase_cell(2, coords + Vector2i.LEFT)
+			elif i == 2:
+				erase_cell(2, coords + Vector2i.DOWN)
+			else:
+				erase_cell(2, coords + Vector2i.RIGHT)
 
 func create_2d_array(width, height, value):
 	var a = []

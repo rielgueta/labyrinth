@@ -8,6 +8,7 @@ func _ready():
 	# Generamos el laberinto
 	$Laberinto.generar_laberinto(ancho_laberinto)
 	$Laberinto.esconder(ancho_laberinto)
+	
 	# Creamos la salida
 	var salida = randi_range(0, ancho_laberinto-1)
 	$Laberinto.modificar_celda(Vector2i(salida, ancho_laberinto-1), 2)
