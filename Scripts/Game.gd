@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var ancho_laberinto = 8
-@export var grid_size = 16
+@export var grid_size = 32
 signal game_over
 
 func _ready():
@@ -11,10 +11,11 @@ func _ready():
 	# Creamos la salida
 	var salida = randi_range(0, ancho_laberinto-1)
 	$Laberinto.modificar_celda(Vector2i(salida, ancho_laberinto-1), 2)
-	$Salida.position = Vector2i(salida*grid_size, ancho_laberinto*grid_size+3)
+	$Salida.position = Vector2i(salida*grid_size, ancho_laberinto*grid_size+6)
 	$Laberinto.mostrar(Vector2i.ZERO)
 
 func _on_salida_body_entered(body):
+	print("Salida")
 	game_over.emit()
 	
 

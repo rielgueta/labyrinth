@@ -1,5 +1,5 @@
 extends Node2D
-var grid_size = 16
+var grid_size = 32
 var walk_trough_walls = false
 
 signal moved

@@ -32,7 +32,7 @@ func generar_laberinto(ancho_laberinto, sed=0):
 		for j in range(0, ancho_laberinto, 1):
 			var posicion = asignar_movimientos(i, j)
 			aguas[i].append(0)
-			set_cell(0, Vector2i(i, j), 0, posicion)
+			set_cell(0, Vector2i(i, j), 2, posicion)
 
 			
 	aguas = agua(0, 0)
@@ -174,7 +174,7 @@ func arreglar(x, y):
 		movimientos_izq[derecha] = true
 		
 		var posicion_izq = convert_to_cell(movimientos_izq)
-		set_cell(0, Vector2i(x - 1, y), 0, posicion_izq)
+		set_cell(0, Vector2i(x - 1, y), 2, posicion_izq)
 	else:
 		var cell_arr = get_cell_atlas_coords(0, Vector2i(x, y - 1))
 		var movimientos_arr = get_moves(cell_arr)
@@ -183,25 +183,26 @@ func arreglar(x, y):
 		movimientos_arr[abajo] = true
 		
 		var posicion_arr = convert_to_cell(movimientos_arr)
-		set_cell(0, Vector2i(x, y - 1), 0, posicion_arr)
+		set_cell(0, Vector2i(x, y - 1), 2, posicion_arr)
 	
 	var posicion = convert_to_cell(movimientos)
-	set_cell(0, Vector2i(x, y), 0, posicion)
+	set_cell(0, Vector2i(x, y), 2, posicion)
 
 func modificar_celda(coordenadas, modificador):
 	var celda_a_mod = get_cell_atlas_coords(0, coordenadas)
 	var mov = get_moves(celda_a_mod)
 	mov[modificador] = true
 	var coord_atlas = convert_to_cell(mov)
-	set_cell(0,coordenadas, 0, coord_atlas)
+	set_cell(0,coordenadas, 2, coord_atlas)
 
 func esconder(ancho):
 	for i in range(ancho):
 		for j in range(ancho):
-			set_cell(1, Vector2i(i, j), 1, Vector2i.ZERO)
+			set_cell(1, Vector2i(i, j), 3, Vector2i.ZERO)
 
 func mostrar(coords:Vector2i):
 	erase_cell(1, coords-Vector2i.LEFT)
+	erase_cell(1, coords-Vector2i.ZERO)
 	erase_cell(1, coords-Vector2i.RIGHT)
 	erase_cell(1, coords-Vector2i.UP)
 	erase_cell(1, coords-Vector2i.DOWN)

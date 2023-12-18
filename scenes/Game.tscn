@@ -31,7 +31,7 @@ layer_1/tile_data = PackedInt32Array(0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(-40, -24)
 anchor_mode = 0
-zoom = Vector2(10, 10)
+zoom = Vector2(5, 5)
 
 [node name="UI" type="Control" parent="Player/Camera2D"]
 layout_mode = 3
@@ -77,7 +77,8 @@ script = ExtResource("6_e4ipy")
 script = ExtResource("4_ur3wm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Salida"]
-position = Vector2(9, 8)
+position = Vector2(16, 16)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_4lkjs")
 
 [node name="Debug" type="Camera2D" parent="."]
