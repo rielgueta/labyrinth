@@ -20,15 +20,18 @@ func _unhandled_key_input(event):
 	var direction = Vector2.ZERO
 	if event.is_action_released("ui_up"):
 		direction.y = -1
+		move(direction)
 	if event.is_action_released("ui_down"):
 		direction.y = 1
+		move(direction)
 	if event.is_action_released("ui_left"):
 		direction.x = -1
+		move(direction)
 	if event.is_action_released("ui_right"):
 		direction.x = 1
+		move(direction)
 	if event.is_action_released("DEBUG"):
 		walk_trough_walls = not walk_trough_walls
-	move(direction)
 
 func move(dir):
 	# Lanza un "rayo laser" en la dirección en la que se quiere mover y si no colisiona con nada...
