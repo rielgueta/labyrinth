@@ -2,6 +2,7 @@ extends Node2D
 var grid_size = 32
 var walk_trough_walls = false
 var vida = 20
+var hambre = 7
 
 signal moved
 # comentadas por si las utilizamos en el futuro
@@ -44,15 +45,31 @@ var comida = 2
 var trampa = 3
 
 func interactuar(id_item):
+	hambre -= 1
 	
 	if id_item == pocima:
-		vida += 2
-		print("vidaaaa")
-		print(vida)
+		var curacion = randi_range(5, 8)
+		vida += curacion
 	elif id_item == comida:
-		print("comida")
+		hambre = 7
 	elif id_item == trampa:
-		vida = vida - 2
-		print("vidaaaaa")
-		print(vida)
+		var daño = randi_range(3, 5)
+		vida -= daño
 	
+	vida = min(vida, 20)
+	
+	if hambre <= 0:
+		if hambre == 0:
+			print("Empieza el hambreeee")
+		if abs(hambre % 2) == 1:
+			vida -= 1
+		
+	if vida <= 0:
+		vida = 0
+		print("Deberías haber muerto! (Pero como que no yet)")
+	
+	print("vidaaaaa : ", vida)
+	var texto = ""
+	for i in range(0, hambre, 1):
+		texto += "⛻"
+	print(texto)
