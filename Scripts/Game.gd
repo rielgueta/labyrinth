@@ -26,3 +26,6 @@ func _change_to_game_over():
 
 func _on_player_moved():
 	$Laberinto.mostrar(($Player.position)/grid_size)
+	# Acá va el interactuar con el objeto.
+	var id_item = $Laberinto.tipo_item(($Player.position)/grid_size)
+	$Player.interactuar(id_item)

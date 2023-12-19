@@ -1,6 +1,7 @@
 extends Node2D
 var grid_size = 32
 var walk_trough_walls = false
+var vida = 20
 
 signal moved
 # comentadas por si las utilizamos en el futuro
@@ -36,3 +37,22 @@ func move(dir):
 		# Entonces se mueve una celda (El tamaño de la celda)
 		position += dir*grid_size
 		moved.emit()
+
+
+var pocima = 1
+var comida = 2
+var trampa = 3
+
+func interactuar(id_item):
+	
+	if id_item == pocima:
+		vida += 2
+		print("vidaaaa")
+		print(vida)
+	elif id_item == comida:
+		print("comida")
+	elif id_item == trampa:
+		vida = vida - 2
+		print("vidaaaaa")
+		print(vida)
+	

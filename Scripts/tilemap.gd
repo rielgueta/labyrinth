@@ -23,6 +23,7 @@ func generar_laberinto(ancho_laberinto, sed=0):
 	# MOMENTANEO
 	set_cell(1 , Vector2i(2, 0), 4, Vector2i(2, 0))
 	set_cell(1 , Vector2i(1, 0), 4, Vector2i(1, 0))
+	set_cell(1 , Vector2i(1, 1), 4, Vector2i(3, 0))
 	
 	aguas = create_2d_array(tamaño_laberinto, tamaño_laberinto,0)
 	if sed != 0:
@@ -37,6 +38,19 @@ func generar_laberinto(ancho_laberinto, sed=0):
 			var posicion = asignar_movimientos(i, j)
 			aguas[i].append(0)
 			set_cell(0, Vector2i(i, j), 2, posicion)
+			
+			# Asignar un item random a la celda
+			var n_aleatorio = randi_range(1, 100)
+			if n_aleatorio >= 80:
+				n_aleatorio = randi_range(1, 100)
+				if n_aleatorio >= 65:
+					set_cell(1 , Vector2i(i, j), 4, Vector2i(3, 0))
+				elif n_aleatorio >= 25:
+					set_cell(1 , Vector2i(i, j), 4, Vector2i(2, 0))
+				else:
+					set_cell(1 , Vector2i(i, j), 4, Vector2i(1, 0))
+				
+			
 
 			
 	aguas = agua(0, 0)
@@ -218,6 +232,11 @@ func mostrar(coords:Vector2i):
 				erase_cell(2, coords + Vector2i.DOWN)
 			else:
 				erase_cell(2, coords + Vector2i.RIGHT)
+
+func tipo_item(coords:Vector2i):
+	var index_item = get_cell_atlas_coords(1, coords)
+	set_cell(1, coords, 4, Vector2i.ZERO)
+	return index_item.x
 
 func create_2d_array(width, height, value):
 	var a = []
