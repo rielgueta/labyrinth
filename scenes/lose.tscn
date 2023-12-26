@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfe4mcbw0kogq"]
+
+[ext_resource type="Script" path="res://Scripts/lose.gd" id="1_3hhtj"]
+[ext_resource type="FontFile" uid="uid://bh3r2bx4ilho" path="res://fonts/Minecraftia-Regular.ttf" id="1_5lnm1"]
+
+[node name="Lose" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3hhtj")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 248.0
+offset_right = 706.0
+offset_bottom = 349.0
+theme_override_fonts/font = ExtResource("1_5lnm1")
+theme_override_font_sizes/font_size = 56
+text = "Haz perdido :("
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 421.0
+offset_right = 730.0
+offset_bottom = 527.0
+theme_override_fonts/font = ExtResource("1_5lnm1")
+theme_override_font_sizes/font_size = 56
+text = "Volver al inicio"
+
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
