@@ -10,9 +10,23 @@ func _ready():
 	$Laberinto.esconder(ancho_laberinto)
 	
 	# Creamos la salida
+	var direc_salida = randi_range(0, 3)
 	var salida = randi_range(0, ancho_laberinto-1)
-	$Laberinto.modificar_celda(Vector2i(salida, ancho_laberinto-1), 2)
-	$Salida.position = Vector2i(salida*grid_size, ancho_laberinto*grid_size+6)
+	var factor = 0
+	if direc_salida == 0 or direc_salida == 2:
+		factor = (ancho_laberinto - 1) * (direc_salida / 2)
+		$Laberinto.modificar_celda(Vector2i(salida, factor), direc_salida)
+		$Salida.position = Vector2i(salida*grid_size, factor*grid_size + grid_size * (direc_salida - 1))
+	else:
+		factor = (ancho_laberinto - 1) * ((direc_salida - 1) / 2)
+		$Laberinto.modificar_celda(Vector2i(factor, salida), direc_salida)
+		$Salida.position = Vector2i(factor*grid_size + grid_size * (direc_salida - 2), salida*grid_size)
+		
+	print(salida)
+	print(factor)
+	print(direc_salida)
+	
+	# $Salida.position = Vector2i(salida*grid_size, ancho_laberinto*grid_size+6)
 	$Laberinto.mostrar(Vector2i.ZERO)
 
 func _on_salida_body_entered(body):

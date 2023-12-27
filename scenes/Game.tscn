@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bewouc6umc27" path="res://scenes/Laberinto.tscn" id="1_7o2eb"]
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_xp63t"]
-[ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/Player.tscn" id="2_t7khs"]
+[ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/player.tscn" id="2_t7khs"]
 [ext_resource type="FontFile" uid="uid://bh3r2bx4ilho" path="res://fonts/Minecraftia-Regular.ttf" id="4_ceuaa"]
 [ext_resource type="Script" path="res://Scripts/Salida.gd" id="4_ur3wm"]
 [ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="5_vdcn2"]
@@ -34,8 +34,6 @@ layer_2/tile_data = PackedInt32Array()
 "tamaño_laberinto" = 20
 
 [node name="Player" parent="." instance=ExtResource("2_t7khs")]
-vida_max = 20
-hambre_maxima = 7
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)

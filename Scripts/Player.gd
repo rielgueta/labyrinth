@@ -10,7 +10,7 @@ var hambre = hambre_maxima
 
 var pocima = 1
 var comida = 2
-var trampa = 3
+var trampa = 4    # Trust me bro, la 3 es la versión visible / desactivada
 
 signal moved
 signal lose
@@ -63,17 +63,18 @@ func interactuar(id_item):
 	elif id_item == comida:
 		hambre = hambre_maxima
 	elif id_item == trampa:
+		print("MUAJAJA TRAMPA")
 		var daño = randi_range(3, 5)
 		vida -= daño
 
 	if hambre <= 0:
 		if hambre == 0:
-			print("Empieza el hambreeee")
+			# MENSAJE DE TENÉS HAMBRE CHE
+			pass
 		# Descuenta 1 de vida cada 2 movimientos si tienes una vida inferior a 0
 		if abs(hambre % 2) == 1:
 			vida -= 1
 		
 	if vida <= 0:
 		vida = 0
-		print("Deberías haber muerto! (Pero como que no yet)")
 		get_tree().change_scene_to_file("res://scenes/lose.tscn")

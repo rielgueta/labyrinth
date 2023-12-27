@@ -20,11 +20,6 @@ func generar_laberinto(ancho_laberinto, sed=0):
 	# var sed = randi()
 	tamaño_laberinto = ancho_laberinto
 	
-	# MOMENTANEO
-	set_cell(1 , Vector2i(2, 0), 4, Vector2i(2, 0))
-	set_cell(1 , Vector2i(1, 0), 4, Vector2i(1, 0))
-	set_cell(1 , Vector2i(1, 1), 4, Vector2i(3, 0))
-	
 	aguas = create_2d_array(tamaño_laberinto, tamaño_laberinto,0)
 	if sed != 0:
 		seed(sed)
@@ -44,7 +39,7 @@ func generar_laberinto(ancho_laberinto, sed=0):
 			if n_aleatorio >= 80:
 				n_aleatorio = randi_range(1, 100)
 				if n_aleatorio >= 65:
-					set_cell(1 , Vector2i(i, j), 4, Vector2i(3, 0))
+					set_cell(1 , Vector2i(i, j), 4, Vector2i(4, 0))
 				elif n_aleatorio >= 25:
 					set_cell(1 , Vector2i(i, j), 4, Vector2i(2, 0))
 				else:
@@ -235,7 +230,13 @@ func mostrar(coords:Vector2i):
 
 func tipo_item(coords:Vector2i):
 	var index_item = get_cell_atlas_coords(1, coords)
-	set_cell(1, coords, 4, Vector2i.ZERO)
+	
+	
+	if index_item.x == 4 or index_item.x == 3:
+		set_cell(1 , coords, 4, Vector2i(3, 0))
+	else:
+		set_cell(1, coords, 4, Vector2i.ZERO)
+	
 	return index_item.x
 
 func create_2d_array(width, height, value):
