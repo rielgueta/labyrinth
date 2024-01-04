@@ -11,7 +11,7 @@ func _ready():
 	
 	# Creamos la salida
 	var direc_salida = randi_range(0, 3)
-	var salida = randi_range(0, ancho_laberinto-1)
+	var salida = randi_range(0, ancho_laberinto - 1)
 	var factor = 0
 	if direc_salida == 0 or direc_salida == 2:
 		factor = (ancho_laberinto - 1) * (direc_salida / 2)
@@ -28,6 +28,7 @@ func _ready():
 	
 	# $Salida.position = Vector2i(salida*grid_size, ancho_laberinto*grid_size+6)
 	$Laberinto.mostrar(Vector2i.ZERO)
+	update_UI()
 
 func _on_salida_body_entered(body):
 	print("Salida")
