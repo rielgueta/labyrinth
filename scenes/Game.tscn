@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c75k4hk1l6yan"]
+[gd_scene load_steps=8 format=3 uid="uid://c75k4hk1l6yan"]
 
 [ext_resource type="PackedScene" uid="uid://bewouc6umc27" path="res://scenes/Laberinto.tscn" id="1_7o2eb"]
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_xp63t"]
-[ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/player.tscn" id="2_t7khs"]
-[ext_resource type="FontFile" uid="uid://bh3r2bx4ilho" path="res://fonts/Minecraftia-Regular.ttf" id="4_ceuaa"]
+[ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/Player.tscn" id="2_t7khs"]
 [ext_resource type="Script" path="res://Scripts/Salida.gd" id="4_ur3wm"]
-[ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="5_vdcn2"]
+[ext_resource type="PackedScene" uid="uid://cnwffefnpo8cv" path="res://scenes/gameplay_ui.tscn" id="4_xk7al"]
 [ext_resource type="Script" path="res://Scripts/ScoreTimer.gd" id="6_e4ipy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4lkjs"]
@@ -38,61 +37,11 @@ layer_2/tile_data = PackedInt32Array()
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)
 
-[node name="UI" type="Control" parent="Player/Camera2D"]
-layout_mode = 3
-anchors_preset = 0
+[node name="UI" parent="Player/Camera2D" instance=ExtResource("4_xk7al")]
 offset_left = -102.0
-offset_top = -75.0
+offset_top = -76.0
 offset_right = 103.0
-offset_bottom = 80.0
-
-[node name="ColorRect" type="ColorRect" parent="Player/Camera2D/UI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -34.5
-offset_right = 34.5
-offset_bottom = 20.0
-grow_horizontal = 2
-color = Color(0.478431, 0.0588235, 0.462745, 1)
-
-[node name="ScoreLabel" type="Label" parent="Player/Camera2D/UI"]
-texture_filter = 1
-texture_repeat = 1
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -16.5
-offset_top = -1.0
-offset_right = 17.5
-offset_bottom = 16.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("4_ceuaa")
-theme_override_font_sizes/font_size = 16
-text = "00:00.0"
-script = ExtResource("5_vdcn2")
-
-[node name="HungerLabel" type="Label" parent="Player/Camera2D/UI"]
-texture_filter = 1
-layout_mode = 1
-offset_top = 42.0
-offset_right = 36.0
-offset_bottom = 59.0
-theme_override_fonts/font = ExtResource("4_ceuaa")
-theme_override_font_sizes/font_size = 8
-text = "Hambre:"
-
-[node name="LifeLabel" type="Label" parent="Player/Camera2D/UI"]
-texture_filter = 1
-layout_mode = 1
-offset_top = 23.0
-offset_right = 36.0
-offset_bottom = 40.0
-theme_override_fonts/font = ExtResource("4_ceuaa")
-theme_override_font_sizes/font_size = 8
-text = "Vida: "
+offset_bottom = 79.0
 
 [node name="ScoreTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -110,8 +59,5 @@ shape = SubResource("RectangleShape2D_4lkjs")
 [node name="Debug" type="Camera2D" parent="."]
 enabled = false
 
-[connection signal="game_over" from="." to="Player/Camera2D/UI/ScoreLabel" method="_on_game_over"]
 [connection signal="moved" from="Player" to="." method="_on_player_moved"]
-[connection signal="change_scene_game_over" from="Player/Camera2D/UI/ScoreLabel" to="." method="_change_to_game_over"]
-[connection signal="timeout" from="ScoreTimer" to="Player/Camera2D/UI/ScoreLabel" method="decisecond_passed"]
 [connection signal="body_entered" from="Salida" to="." method="_on_salida_body_entered"]

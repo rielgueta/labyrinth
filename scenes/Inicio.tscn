@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://71ncjgbenwkc"]
 
 [ext_resource type="Script" path="res://Scripts/Inicio.gd" id="1_nr4md"]
-[ext_resource type="FontFile" uid="uid://dchv2aiqqob4d" path="res://fonts/Xolonium-Regular.ttf" id="2_pw826"]
+[ext_resource type="Theme" uid="uid://bfbcl7eoikfpp" path="res://UI/main_theme.tres" id="2_7ne4m"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -19,8 +19,7 @@ offset_left = 128.0
 offset_top = 128.0
 offset_right = 368.0
 offset_bottom = 167.0
-theme_override_fonts/font = ExtResource("2_pw826")
-theme_override_font_sizes/font_size = 25
+theme = ExtResource("2_7ne4m")
 text = "Empezar a jugar"
 
 [node name="Controls" type="Button" parent="."]
@@ -30,8 +29,7 @@ offset_left = 128.0
 offset_top = 192.0
 offset_right = 368.0
 offset_bottom = 231.0
-theme_override_fonts/font = ExtResource("2_pw826")
-theme_override_font_sizes/font_size = 25
+theme = ExtResource("2_7ne4m")
 text = "Controles"
 
 [node name="Credits" type="Button" parent="."]
@@ -41,8 +39,7 @@ offset_left = 128.0
 offset_top = 256.0
 offset_right = 368.0
 offset_bottom = 295.0
-theme_override_fonts/font = ExtResource("2_pw826")
-theme_override_font_sizes/font_size = 25
+theme = ExtResource("2_7ne4m")
 text = "Créditos"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -51,12 +48,12 @@ zoom = Vector2(2, 2)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 23.0
-offset_right = 404.0
-offset_bottom = 60.0
-theme_override_fonts/font = ExtResource("2_pw826")
-theme_override_font_sizes/font_size = 27
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 500.0
+offset_bottom = 91.0
+theme = ExtResource("2_7ne4m")
+theme_override_font_sizes/font_size = 64
 text = "Labyrinth Quest XII"
 
 [connection signal="pressed" from="StartButton" to="." method="start_button_pressed"]

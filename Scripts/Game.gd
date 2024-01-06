@@ -52,5 +52,5 @@ func update_UI():
 	var hambre_text = ""
 	$Player/Camera2D/UI/LifeLabel.text = "Vida: " + str(vida)
 	for i in range(0, hambre, 1):
-		hambre_text += "∆"
+		hambre_text += "&"
 	$Player/Camera2D/UI/HungerLabel.text = "Hambre: " + hambre_text

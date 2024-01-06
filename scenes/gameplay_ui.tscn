@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnwffefnpo8cv"]
+
+[ext_resource type="Theme" uid="uid://bfbcl7eoikfpp" path="res://UI/main_theme.tres" id="1_wo0ig"]
+[ext_resource type="FontFile" uid="uid://b1ym8dy0uk0v8" path="res://fonts/BitPotionExt.ttf" id="1_wt1pv"]
+[ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="2_rduij"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2h8n"]
+bg_color = Color(0.176471, 0.180392, 0.176471, 1)
+
+[sub_resource type="Theme" id="Theme_mqkqa"]
+default_font_size = 16
+Button/styles/normal = SubResource("StyleBoxFlat_h2h8n")
+Fonts/fonts/large = ExtResource("1_wt1pv")
+Fonts/fonts/normal = ExtResource("1_wt1pv")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5i5kc"]
+bg_color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="UI" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 205.0
+offset_bottom = 155.0
+theme = SubResource("Theme_mqkqa")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 3.0
+offset_right = 120.0
+offset_bottom = 20.0
+theme = ExtResource("1_wo0ig")
+theme_override_styles/panel = SubResource("StyleBoxFlat_5i5kc")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -29.5
+offset_top = 4.0
+offset_right = 15.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("1_wo0ig")
+theme_override_font_sizes/font_size = 16
+text = "00:00.0"
+script = ExtResource("2_rduij")
+
+[node name="HungerLabel" type="Label" parent="."]
+layout_mode = 1
+offset_top = 42.0
+offset_right = 36.0
+offset_bottom = 59.0
+theme = ExtResource("1_wo0ig")
+theme_override_font_sizes/font_size = 16
+text = "Hambre:"
+
+[node name="LifeLabel" type="Label" parent="."]
+layout_mode = 1
+offset_top = 23.0
+offset_right = 36.0
+offset_bottom = 40.0
+theme = ExtResource("1_wo0ig")
+theme_override_font_sizes/font_size = 16
+text = "Vida: "

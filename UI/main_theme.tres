@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bfbcl7eoikfpp"]
+
+[ext_resource type="FontFile" uid="uid://bbj2fnjj2swv0" path="res://fonts/pixel_operator/PixelOperator.ttf" id="1_k5wg5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_re6g2"]
+bg_color = Color(0.643137, 0.231373, 0.27451, 1)
+
+[resource]
+default_font = ExtResource("1_k5wg5")
+default_font_size = 32
+Button/styles/normal = SubResource("StyleBoxFlat_re6g2")
