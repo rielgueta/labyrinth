@@ -14,6 +14,7 @@ var trampa = 4    # Trust me bro, la 3 es la versión visible / desactivada
 
 signal moved
 signal lose
+signal e
 # comentadas por si las utilizamos en el futuro
 #func _ready():
 #	$Sprite2D.show()
@@ -41,6 +42,8 @@ func _unhandled_key_input(event):
 		move(direction)
 	if event.is_action_released("DEBUG"):
 		walk_trough_walls = not walk_trough_walls
+	if event.is_action_released("Inventario"):
+		e.emit()
 
 
 func move(dir):
@@ -55,17 +58,18 @@ func move(dir):
 
 func interactuar(id_item):
 	# La función que se encarga de interactuar con los items del laberinto
-	hambre -= 1
+	if not walk_trough_walls:
+		hambre -= 1
 	
-	if id_item == pocima:
-		var curacion = randi_range(5, 8)
-		vida = min(vida+curacion, vida_max)
-	elif id_item == comida:
-		hambre = hambre_maxima
-	elif id_item == trampa:
-		print("MUAJAJA TRAMPA")
-		var daño = randi_range(3, 5)
-		vida -= daño
+		if id_item == pocima:
+			var curacion = randi_range(5, 8)
+			vida = min(vida+curacion, vida_max)
+		elif id_item == comida:
+			hambre = hambre_maxima
+		elif id_item == trampa:
+			print("MUAJAJA TRAMPA")
+			var daño = randi_range(3, 5)
+			vida -= daño
 
 	if hambre <= 0:
 		if hambre == 0:

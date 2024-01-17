@@ -6,6 +6,7 @@ signal game_over
 
 func _ready():
 	# Generamos el laberinto
+	
 	$Laberinto.generar_laberinto(ancho_laberinto)
 	$Laberinto.esconder(ancho_laberinto)
 	
@@ -21,13 +22,12 @@ func _ready():
 		factor = (ancho_laberinto - 1) * ((direc_salida - 1) / 2)
 		$Laberinto.modificar_celda(Vector2i(factor, salida), direc_salida)
 		$Salida.position = Vector2i(factor*grid_size + grid_size * (direc_salida - 2), salida*grid_size)
-		
-	print(salida)
-	print(factor)
-	print(direc_salida)
+	
+	var aleatorio = randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1)
+	$Player.position += Vector2(aleatorio, aleatorio) * grid_size
 	
 	# $Salida.position = Vector2i(salida*grid_size, ancho_laberinto*grid_size+6)
-	$Laberinto.mostrar(Vector2i.ZERO)
+	$Laberinto.mostrar(Vector2i(aleatorio, aleatorio))
 	update_UI()
 
 func _on_salida_body_entered(body):
