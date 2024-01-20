@@ -24,6 +24,7 @@ func _on_game_over():
 
 func decisecond_passed():
 	if update:
+		# Revisar si efectivamente es un decisegundo, pq al menos en mi compu es como 0.5 no 0.1
 		deci_sec += 1
 		if deci_sec >= 10:
 			seconds += 1

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bewouc6umc27" path="res://scenes/Laberinto.tscn" id="1_7o2eb"]
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_xp63t"]
-[ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/player.tscn" id="2_t7khs"]
+[ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/Player.tscn" id="2_t7khs"]
 [ext_resource type="Script" path="res://scenes/Menu.gd" id="4_3s6rb"]
 [ext_resource type="Script" path="res://Scripts/Salida.gd" id="4_ur3wm"]
 [ext_resource type="PackedScene" uid="uid://cnwffefnpo8cv" path="res://scenes/gameplay_ui.tscn" id="4_xk7al"]
@@ -88,7 +88,11 @@ shape = SubResource("RectangleShape2D_4lkjs")
 [node name="Debug" type="Camera2D" parent="."]
 enabled = false
 
+[connection signal="game_over" from="." to="." method="_change_to_game_over"]
 [connection signal="e" from="Player" to="Player/Camera2D/Menu" method="_on_player_e"]
 [connection signal="moved" from="Player" to="." method="_on_player_moved"]
 [connection signal="button_down" from="Player/Camera2D/Menu/Button" to="Player/Camera2D/Menu" method="_on_button_button_down"]
+[connection signal="timeout" from="ScoreTimer" to="Player/Camera2D/UI/ScoreLabel" method="decisecond_passed"]
 [connection signal="body_entered" from="Salida" to="." method="_on_salida_body_entered"]
+
+[editable path="Player/Camera2D/UI"]
