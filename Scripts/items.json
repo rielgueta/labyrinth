@@ -1,0 +1,14 @@
+{
+    "Health Potion": {
+        "name": "Health Potion",
+        "description": "Restores 50 health.",
+        "value": 25,
+        "icon": "potion.png"
+    },  
+    "Bread": {
+        "name": "Bread",
+        "description": "Recovers Hunger.",
+        "value": 15,
+        "icon": "bread.png"
+    }
+}
