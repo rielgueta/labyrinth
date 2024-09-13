@@ -16,10 +16,8 @@ func _ready():
 
 
 func _on_game_over():
-	print("HOLA")
 	update = false
 	global.score = texto
-	print(texto)
 	change_scene_game_over.emit()
 
 
