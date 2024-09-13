@@ -2,3 +2,4 @@
 .godot/
 /.import/
 /Builds
+*.import
