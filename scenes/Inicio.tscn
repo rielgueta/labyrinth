@@ -5,7 +5,7 @@
 
 [node name="Menu de Inicio" type="MarginContainer"]
 offset_right = 512.0
-offset_bottom = 320.0
+offset_bottom = 400.0
 script = ExtResource("1_2qlhb")
 
 [node name="Contenido" type="AspectRatioContainer" parent="."]
@@ -51,10 +51,6 @@ focus_neighbor_top = NodePath("../Controls")
 focus_neighbor_bottom = NodePath("../StartButton")
 theme = ExtResource("2_7ne4m")
 text = "Créditos"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(255, 151)
-zoom = Vector2(2, 2)
 
 [connection signal="pressed" from="Contenido/opciones/StartButton" to="." method="start_button_pressed"]
 [connection signal="pressed" from="Contenido/opciones/Controls" to="." method="presiona_controles"]

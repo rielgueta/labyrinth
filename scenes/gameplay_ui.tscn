@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cnwffefnpo8cv"]
 
 [ext_resource type="Theme" uid="uid://bfbcl7eoikfpp" path="res://UI/main_theme.tres" id="1_wo0ig"]
-[ext_resource type="FontFile" uid="uid://b1ym8dy0uk0v8" path="res://fonts/BitPotionExt.ttf" id="1_wt1pv"]
+[ext_resource type="FontFile" uid="uid://b1ym8dy0uk0v8" path="res://fonts/Unused/BitPotionExt.ttf" id="1_wt1pv"]
 [ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="2_rduij"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2h8n"]

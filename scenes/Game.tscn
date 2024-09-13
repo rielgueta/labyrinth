@@ -37,7 +37,7 @@ layer_2/tile_data = PackedInt32Array()
 [node name="Player" parent="." instance=ExtResource("2_t7khs")]
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(5, 5)
+zoom = Vector2(2, 2)
 
 [node name="Menu" type="Control" parent="Player/Camera2D"]
 layout_mode = 3
@@ -89,6 +89,8 @@ shape = SubResource("RectangleShape2D_4lkjs")
 enabled = false
 
 [connection signal="game_over" from="." to="." method="_change_to_game_over"]
+[connection signal="game_over" from="." to="Player/Camera2D/UI/ScoreLabel" method="_on_game_over"]
+[connection signal="game_over" from="." to="ScoreTimer" method="_on_game_over"]
 [connection signal="e" from="Player" to="Player/Camera2D/Menu" method="_on_player_e"]
 [connection signal="moved" from="Player" to="." method="_on_player_moved"]
 [connection signal="button_down" from="Player/Camera2D/Menu/Button" to="Player/Camera2D/Menu" method="_on_button_button_down"]
