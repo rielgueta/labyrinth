@@ -1,60 +1,60 @@
 [gd_scene load_steps=3 format=3 uid="uid://71ncjgbenwkc"]
 
-[ext_resource type="Script" path="res://Scripts/Inicio.gd" id="1_nr4md"]
+[ext_resource type="Script" path="res://scenes/Inicio.gd" id="1_2qlhb"]
 [ext_resource type="Theme" uid="uid://bfbcl7eoikfpp" path="res://UI/main_theme.tres" id="2_7ne4m"]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_nr4md")
+[node name="Menu de Inicio" type="MarginContainer"]
+offset_right = 512.0
+offset_bottom = 320.0
+script = ExtResource("1_2qlhb")
 
-[node name="StartButton" type="Button" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 128.0
-offset_top = 128.0
-offset_right = 368.0
-offset_bottom = 167.0
-theme = ExtResource("2_7ne4m")
-text = "Empezar a jugar"
+[node name="Contenido" type="AspectRatioContainer" parent="."]
+layout_mode = 2
 
-[node name="Controls" type="Button" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 128.0
-offset_top = 192.0
-offset_right = 368.0
-offset_bottom = 231.0
-theme = ExtResource("2_7ne4m")
-text = "Controles"
-
-[node name="Credits" type="Button" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 128.0
-offset_top = 256.0
-offset_right = 368.0
-offset_bottom = 295.0
-theme = ExtResource("2_7ne4m")
-text = "Créditos"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-zoom = Vector2(2, 2)
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = 500.0
-offset_bottom = 91.0
+[node name="Titulo" type="Label" parent="Contenido"]
+layout_mode = 2
+size_flags_vertical = 0
 theme = ExtResource("2_7ne4m")
 theme_override_font_sizes/font_size = 64
 text = "Labyrinth Quest XII"
 
-[connection signal="pressed" from="StartButton" to="." method="start_button_pressed"]
-[connection signal="pressed" from="Controls" to="." method="presiona_controles"]
+[node name="opciones" type="VBoxContainer" parent="Contenido"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="StartButton" type="Button" parent="Contenido/opciones"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../Controls")
+theme = ExtResource("2_7ne4m")
+text = "Empezar a jugar"
+
+[node name="Label" type="Label" parent="Contenido/opciones"]
+layout_mode = 2
+
+[node name="Controls" type="Button" parent="Contenido/opciones"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../Credits")
+theme = ExtResource("2_7ne4m")
+text = "Controles"
+
+[node name="Label2" type="Label" parent="Contenido/opciones"]
+layout_mode = 2
+
+[node name="Credits" type="Button" parent="Contenido/opciones"]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_top = NodePath("../Controls")
+focus_neighbor_bottom = NodePath("../StartButton")
+theme = ExtResource("2_7ne4m")
+text = "Créditos"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(255, 151)
+zoom = Vector2(2, 2)
+
+[connection signal="pressed" from="Contenido/opciones/StartButton" to="." method="start_button_pressed"]
+[connection signal="pressed" from="Contenido/opciones/Controls" to="." method="presiona_controles"]
