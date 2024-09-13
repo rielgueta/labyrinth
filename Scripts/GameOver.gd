@@ -1,8 +1,6 @@
 extends Control
 
-func _ready():
-	$BackToMenu.grab_focus()
-	$BackToMenu.grab_click_focus()
+
 
 
 func _on_back_to_menu_pressed():
