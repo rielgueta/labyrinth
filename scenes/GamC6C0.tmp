@@ -1,11 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://c75k4hk1l6yan"]
+[gd_scene load_steps=11 format=4 uid="uid://c75k4hk1l6yan"]
 
 [ext_resource type="Script" path="res://Scripts/Game.gd" id="1_xp63t"]
 [ext_resource type="PackedScene" uid="uid://ctksfnssr53yy" path="res://scenes/Player.tscn" id="2_t7khs"]
-[ext_resource type="Script" path="res://Scripts/items.gd" id="3_bwo1m"]
 [ext_resource type="Script" path="res://Scripts/tilemap.gd" id="3_ncukc"]
 [ext_resource type="TileSet" uid="uid://dnrll7emphamq" path="res://Tilesets/tilemap.tres" id="3_vi0kf"]
-[ext_resource type="Script" path="res://Scripts/FOW.gd" id="3_wy7yf"]
 [ext_resource type="Script" path="res://scenes/Menu.gd" id="4_3s6rb"]
 [ext_resource type="Script" path="res://Scripts/Salida.gd" id="4_ur3wm"]
 [ext_resource type="PackedScene" uid="uid://cnwffefnpo8cv" path="res://scenes/gameplay_ui.tscn" id="4_xk7al"]
@@ -19,22 +17,21 @@ size = Vector2(15.5, 16.3125)
 script = ExtResource("1_xp63t")
 ancho_laberinto = 20
 
+[node name="Items" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_set = ExtResource("3_vi0kf")
+
+[node name="Desconocido" type="TileMapLayer" parent="."]
+use_parent_material = true
+tile_set = ExtResource("3_vi0kf")
+
 [node name="Laberinto" type="TileMapLayer" parent="."]
 texture_filter = 1
 use_parent_material = true
 tile_map_data = PackedByteArray("AAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAADAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAQAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAAAAAACAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAA=")
 tile_set = ExtResource("3_vi0kf")
 script = ExtResource("3_ncukc")
-
-[node name="Items" type="TileMapLayer" parent="."]
-use_parent_material = true
-tile_set = ExtResource("3_vi0kf")
-script = ExtResource("3_bwo1m")
-
-[node name="Desconocido" type="TileMapLayer" parent="."]
-use_parent_material = true
-tile_set = ExtResource("3_vi0kf")
-script = ExtResource("3_wy7yf")
+"tamaño_laberinto" = null
 
 [node name="Player" parent="." instance=ExtResource("2_t7khs")]
 

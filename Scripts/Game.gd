@@ -8,7 +8,8 @@ func _ready():
 	# Generamos el laberinto
 	
 	$Laberinto.generar_laberinto(ancho_laberinto)
-	$Laberinto.esconder(ancho_laberinto)
+	$Items.generar_mapa_items(ancho_laberinto)
+	$Desconocido.generar_fow(ancho_laberinto)
 	
 	# Creamos la salida
 	var direc_salida = randi_range(0, 3)
@@ -23,11 +24,13 @@ func _ready():
 		$Laberinto.modificar_celda(Vector2i(factor, salida), direc_salida)
 		$Salida.position = Vector2i(factor*grid_size + grid_size * (direc_salida - 2), salida*grid_size)
 	
-	var aleatorio = randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1)
-	$Player.position += Vector2(aleatorio, aleatorio) * grid_size
+	var pos = Vector2(randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1),
+	+				   randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1))
 	
+	$Player.position += pos * grid_size
+	pos = Vector2i(pos)
 	# $Salida.position = Vector2i(salida*grid_size, ancho_laberinto*grid_size+6)
-	$Laberinto.mostrar(Vector2i(aleatorio, aleatorio))
+	$Desconocido.revelar(pos, $Laberinto.obtener_posiciones(pos))
 	update_UI()
 
 func _on_salida_body_entered(body):
@@ -40,9 +43,10 @@ func _change_to_game_over():
 
 
 func _on_player_moved():
-	$Laberinto.mostrar(($Player.position)/grid_size)
+	var pos = $Player.position / grid_size
+	$Desconocido.revelar(pos, $Laberinto.obtener_posiciones(pos))
 	# Acá va el interactuar con el objeto.
-	var id_item = $Laberinto.tipo_item(($Player.position)/grid_size)
+	var id_item = $Items.tipo_item(($Player.position)/grid_size)
 	$Player.interactuar(id_item)
 	update_UI()
 

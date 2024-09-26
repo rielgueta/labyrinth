@@ -123,6 +123,7 @@ func asignar_movimientos(x, y):
 func get_moves(cell: Vector2i, direccion=-1):
 	# Array que guarda las conexiones asociadas a una coordenada del Atlas
 	var movimientos = [false, false, false, false]
+	
 	if cell.y == 1 or cell.y == 3:
 		movimientos[arriba] = true
 	if cell.y == 2 or cell.y == 3:
@@ -136,9 +137,6 @@ func get_moves(cell: Vector2i, direccion=-1):
 		return movimientos
 	else:
 		return movimientos[direccion]
-	
-func obtener_posiciones(coord: Vector2i):
-	return get_moves(get_cell_atlas_coords(coord))
 	
 func convert_to_cell(movimientos):
 	# Dada una lista con las conexiones posibles, retorna el ID de la celda asociada
@@ -218,17 +216,17 @@ func modificar_celda(coordenadas, modificador):
 
 func mostrar(coords:Vector2i):
 	var movimientos = get_moves(get_cell_atlas_coords(coords))
-	#erase_cell(coords-Vector2i.ZERO)
-	#for i in range(0, 4, 1):
-		#if movimientos[i]:
-			#if i == 0:
-				#erase_cell(coords + Vector2i.UP)
-			#elif i == 1:
-				#erase_cell(coords + Vector2i.LEFT)
-			#elif i == 2:
-				#erase_cell(coords + Vector2i.DOWN)
-			#else:
-				#erase_cell(coords + Vector2i.RIGHT)
+	erase_cell(coords-Vector2i.ZERO)
+	for i in range(0, 4, 1):
+		if movimientos[i]:
+			if i == 0:
+				erase_cell(coords + Vector2i.UP)
+			elif i == 1:
+				erase_cell(coords + Vector2i.LEFT)
+			elif i == 2:
+				erase_cell(coords + Vector2i.DOWN)
+			else:
+				erase_cell(coords + Vector2i.RIGHT)
 
 func tipo_item(coords:Vector2i):
 	var index_item = get_cell_atlas_coords(coords)
