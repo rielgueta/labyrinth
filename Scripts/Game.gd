@@ -1,28 +1,43 @@
 extends Node2D
 
+@onready var globals = get_node("/root/Global")
+
 @export var ancho_laberinto = 8
 @export var grid_size = 32
+
 signal game_over
 
+
 func _ready():
-	# Generamos el laberinto
+	globals.ANCHO_LAB = ancho_laberinto
+	globals.GRID_SIZE = grid_size
 	
-	$Laberinto.generar_laberinto(ancho_laberinto)
-	$Items.generar_mapa_items(ancho_laberinto)
-	$Desconocido.generar_fow(ancho_laberinto)
+	# Generamos el laberinto
+	$Laberinto.generar_laberinto(globals.ANCHO_LAB)
+	$Items.generar_mapa_items(globals.ANCHO_LAB)
+	$Desconocido.generar_fow(globals.ANCHO_LAB)
 	
 	# Creamos la salida
 	var direc_salida = randi_range(0, 3)
-	var salida = randi_range(0, ancho_laberinto - 1)
-	var factor = 0
-	if direc_salida == 0 or direc_salida == 2:
-		factor = (ancho_laberinto - 1) * (direc_salida / 2)
-		$Laberinto.modificar_celda(Vector2i(salida, factor), direc_salida)
-		$Salida.position = Vector2i(salida*grid_size, factor*grid_size + grid_size * (direc_salida - 1))
-	else:
-		factor = (ancho_laberinto - 1) * ((direc_salida - 1) / 2)
-		$Laberinto.modificar_celda(Vector2i(factor, salida), direc_salida)
-		$Salida.position = Vector2i(factor*grid_size + grid_size * (direc_salida - 2), salida*grid_size)
+	# Salida es la coordenada del borde
+	# Salida_2 es la otra coordenada, hacia donde la salida apunta. 
+	var salida_cord_secundaria = randi_range(0, ancho_laberinto - 1)
+	var salida_cord_primaria = (0 if direc_salida in [globals.UP, globals.LEFT] else ancho_laberinto - 1)
+	
+	var pos_sal = [salida_cord_secundaria, salida_cord_primaria]
+	if direc_salida in [globals.LEFT, globals.RIGHT]:
+		pos_sal = [salida_cord_primaria, salida_cord_secundaria]
+	print(pos_sal)
+	$Laberinto.modificar_celda(Vector2i(pos_sal[0], pos_sal[1]), direc_salida)
+	$Salida.position = (Vector2i(pos_sal[0], pos_sal[1]) + globals.vectores[direc_salida])*grid_size
+	#if direc_salida == globals.UP or direc_salida == globals.DOWN :
+		#$Laberinto.modificar_celda(Vector2i(salida, salida_2), direc_salida)
+		#$Salida.position = Vector2i(salida*grid_size, 
+									#grid_size*(salida_2 + (direc_salida - 1)))
+	#else:
+		#$Laberinto.modificar_celda(Vector2i(salida_2, salida), direc_salida)
+		#$Salida.position = Vector2i(salida_2*grid_size + grid_size * (direc_salida - 2), 
+									#salida*grid_size)
 	
 	var pos = Vector2(randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1),
 	+				   randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1))
