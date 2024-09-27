@@ -67,7 +67,6 @@ func interactuar(id_item):
 		elif id_item == comida:
 			hambre = hambre_maxima
 		elif id_item == trampa:
-			print("MUAJAJA TRAMPA")
 			var daño = randi_range(3, 5)
 			vida -= daño
 

@@ -24,20 +24,15 @@ func _ready():
 	var salida_cord_secundaria = randi_range(0, ancho_laberinto - 1)
 	var salida_cord_primaria = (0 if direc_salida in [globals.UP, globals.LEFT] else ancho_laberinto - 1)
 	
-	var pos_sal = [salida_cord_secundaria, salida_cord_primaria]
+	var pos_sal = Vector2i(salida_cord_secundaria, salida_cord_primaria)
 	if direc_salida in [globals.LEFT, globals.RIGHT]:
-		pos_sal = [salida_cord_primaria, salida_cord_secundaria]
+		pos_sal = Vector2i(salida_cord_primaria, salida_cord_secundaria)
+	
 	print(pos_sal)
-	$Laberinto.modificar_celda(Vector2i(pos_sal[0], pos_sal[1]), direc_salida)
-	$Salida.position = (Vector2i(pos_sal[0], pos_sal[1]) + globals.vectores[direc_salida])*grid_size
-	#if direc_salida == globals.UP or direc_salida == globals.DOWN :
-		#$Laberinto.modificar_celda(Vector2i(salida, salida_2), direc_salida)
-		#$Salida.position = Vector2i(salida*grid_size, 
-									#grid_size*(salida_2 + (direc_salida - 1)))
-	#else:
-		#$Laberinto.modificar_celda(Vector2i(salida_2, salida), direc_salida)
-		#$Salida.position = Vector2i(salida_2*grid_size + grid_size * (direc_salida - 2), 
-									#salida*grid_size)
+	
+	$Laberinto.modificar_celda(pos_sal, direc_salida)
+	$Salida.position = (pos_sal + globals.vectores[direc_salida]) * grid_size
+	
 	
 	var pos = Vector2(randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1),
 	+				   randi_range(int(ancho_laberinto / 2) - 1, int(ancho_laberinto / 2) + 1))
